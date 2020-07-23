@@ -1,3 +1,5 @@
 # simple-ransomeware
 ransomeware encryption/decryption using RSA, xor
-requirements : openssl
+<br>- requirements : openssl
+<br>- encrypt usage : ./encryption [key]
+<br>- decrypt usage : ./decryption then input key
